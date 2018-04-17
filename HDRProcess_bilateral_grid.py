@@ -282,9 +282,9 @@ if __name__ == "__main__":
     range_sample = 0.01
     gaussian_radius = 10
 
-    grid_channel_l = make_grid_channel(img_lab, 0, space_sample, range_sample)
-    channel_l_after_grid = convol_grid(img_lab, grid_channel_l, space_sample, range_sample, gaussian_radius, 50.0, 5.0)
-    triline_interp(img_lab, img_lab, channel_l_after_grid, 0, space_sample, range_sample)
+    # grid_channel_l = make_grid_channel(img_lab, 0, space_sample, range_sample)
+    # channel_l_after_grid = convol_grid(img_lab, grid_channel_l, space_sample, range_sample, gaussian_radius, 50.0, 5.0)
+    # triline_interp(img_lab, img_lab, channel_l_after_grid, 0, space_sample, range_sample)
 
     I_rgb = cv2.cvtColor(img_lab, cv2.COLOR_Lab2RGB)
     # Il = inverse_gamma(I_rgb)
@@ -312,12 +312,12 @@ if __name__ == "__main__":
 
     grid_channel_l_2 = make_grid_channel(L2, 0, space_sample, range_sample)
     channel_l_after_grid_2 = convol_grid(L2, grid_channel_l_2, space_sample, range_sample, 10, 100.0, 30.0)
-    triline_interp(L1, Fbe, channel_l_after_grid, 0, space_sample, range_sample)
+    triline_interp(L1, Fbe, channel_l_after_grid_2, 0, space_sample, range_sample)
 
     Fbe_rgb = cv2.cvtColor(Fbe, cv2.COLOR_Lab2RGB)
     Fbe_rgb_float = Fbe_rgb.astype(float)
 
-    Fbe_rgb_float = Fbe_rgb_float * (165 / 90) + 1
+    Fbe_rgb_float = Fbe_rgb_float/255.0 * (187 / 56.0) + 1
 
     Il_res = (Il * Fbe_rgb_float).astype('uint8')
 
